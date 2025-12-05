@@ -17,7 +17,7 @@ static int quit_pressed = 0;
 
 #ifdef _WIN32
 int input_update() {
-    // En Windows, usar _kbhit para entrada no bloqueante
+    // En Windows
     while (_kbhit()) {
         char c = _getch();
         if (c == 'a' || c == 'A') {
@@ -45,7 +45,7 @@ int input_update() {
     return 0;
 }
 #else
-// Para Linux/Mac - versión mejorada
+// Para Linux/Mac
 static void enable_raw_mode() {
     static struct termios oldt, newt;
     static int initialized = 0;
