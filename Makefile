@@ -40,7 +40,7 @@ tests: $(TEST_OBJ) $(OBJ)
 #  Limpieza de archivos compilados
 # --------------------------------------------------------
 clean:
-	rm -f src/.o tests/.o $(BIN) $(TEST_BIN)
+	rm -f src/*.o tests/*.o $(BIN) $(TEST_BIN)
 
 # --------------------------------------------------------
 #  Limpieza total (incluye el ejecutable de juego)
