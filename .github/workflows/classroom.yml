@@ -4,17 +4,17 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - "src/**"
-      - "include/**"
-      - "test/**"
+      - "src/"
+      - "include/"
+      - "test/"          # CAMBIO: de 'tests/' a 'test/'
       - "Makefile"
       - ".github/workflows/tests.yml"
   pull_request:
     branches: [ "main" ]
     paths:
-      - "src/**"
-      - "include/**"
-      - "test/**"
+      - "src/"
+      - "include/"
+      - "test/"          # CAMBIO: de 'tests/' a 'test/'
       - "Makefile"
 
 jobs:
@@ -35,4 +35,4 @@ jobs:
       run: make tests
 
     - name: Run tests
-      run: ./test/run_tests
+      run: ./test/run_tests  # CAMBIO: de './tests/' a './test/'
