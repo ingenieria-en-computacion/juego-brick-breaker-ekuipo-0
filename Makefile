@@ -1,32 +1,51 @@
-name: C/C++ Tests
+# --------------------------------------------------------
+#  Makefile para el proyecto Breakout (versión para estudiantes)
+# --------------------------------------------------------
 
-on:
-  push:
-    branches: [ "main" ]
-    paths:
-      - "src/"
-      - "include/"
-      - "tests/"
-      - "Makefile"
-      - ".github/workflows/tests.yml"
-  pull_request:
-    branches: [ "main" ]
-    paths:
-      - "src/"
-      - "include/"
-      - "tests/"
-      - "Makefile"
+CC = gcc
+CFLAGS = -Wall -Wextra -std=c11 -Iinclude
 
-jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
+# ----- Archivos del proyecto principal -----
+SRC := $(wildcard src/*.c)
+OBJ := $(SRC:.c=.o)
 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+# ----- Archivos de test -----
+TEST_SRC := $(wildcard tests/*.c)
+TEST_OBJ := $(TEST_SRC:.c=.o)
 
-    - name: Install build tools
-      run: sudo apt-get update && sudo apt-get install -y build-essential
+# ----- Ejecutables -----
+BIN_DIR = bin
+BIN = $(BIN_DIR)/game
+TEST_BIN = tests/run_tests
 
-    - name: Build project
-      run: make
+# --------------------------------------------------------
+#  Objetivo por defecto: compilar el juego
+# --------------------------------------------------------
+all: $(BIN)
+
+# --------------------------------------------------------
+#  Compilar el ejecutable principal
+# --------------------------------------------------------
+$(BIN): $(OBJ)
+	@mkdir -p $(BIN_DIR)
+	$(CC) $(OBJ) -o $(BIN)
+
+# --------------------------------------------------------
+#  Compilar los tests
+# --------------------------------------------------------
+tests: $(TEST_OBJ) $(OBJ)
+	$(CC) $(TEST_OBJ) $(OBJ) -o $(TEST_BIN)
+
+# --------------------------------------------------------
+#  Limpieza de archivos compilados
+# --------------------------------------------------------
+clean:
+	rm -f src/.o tests/.o $(BIN) $(TEST_BIN)
+
+# --------------------------------------------------------
+#  Limpieza total (incluye el ejecutable de juego)
+# --------------------------------------------------------
+clean_all: clean
+	rm -rf $(BIN_DIR)
+
+.PHONY: all tests clean clean_all
