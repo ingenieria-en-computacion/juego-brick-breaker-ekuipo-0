@@ -6,7 +6,7 @@ on:
     paths:
       - "src/**"
       - "include/**"
-      - "tests/**"
+      - "test/**"
       - "Makefile"
       - ".github/workflows/tests.yml"
   pull_request:
@@ -14,7 +14,7 @@ on:
     paths:
       - "src/**"
       - "include/**"
-      - "tests/**"
+      - "test/**"
       - "Makefile"
 
 jobs:
@@ -35,4 +35,4 @@ jobs:
       run: make tests
 
     - name: Run tests
-      run: ./tests/run_tests
+      run: ./test/run_tests
