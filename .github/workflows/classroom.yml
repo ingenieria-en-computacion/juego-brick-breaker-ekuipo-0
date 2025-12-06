@@ -4,17 +4,17 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - "src/"
-      - "include/"
-      - "test/"
+      - "src/**"
+      - "include/**"
+      - "tests/**"
       - "Makefile"
-      - ".github/workflows/classroom.yml"
+      - ".github/workflows/tests.yml"
   pull_request:
     branches: [ "main" ]
     paths:
-      - "src/"
-      - "include/"
-      - "test/"
+      - "src/**"
+      - "include/**"
+      - "tests/**"
       - "Makefile"
 
 jobs:
@@ -31,6 +31,8 @@ jobs:
     - name: Build project
       run: make
 
-    - name: Build and run teacher tests
-      working-directory: test
-      run: bash test_compile.sh
+    - name: Build tests
+      run: make tests
+
+    - name: Run tests
+      run: ./tests/run_tests
