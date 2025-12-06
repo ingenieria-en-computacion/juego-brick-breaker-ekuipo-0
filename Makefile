@@ -10,13 +10,13 @@ SRC := $(wildcard src/*.c)
 OBJ := $(SRC:.c=.o)
 
 # ----- Archivos de test -----
-TEST_SRC := $(wildcard test/*.c)
+TEST_SRC := $(wildcard test/*.c)    # CAMBIO: de 'tests/*.c' a 'test/*.c'
 TEST_OBJ := $(TEST_SRC:.c=.o)
 
 # ----- Ejecutables -----
 BIN_DIR = bin
 BIN = $(BIN_DIR)/game
-TEST_BIN = test/run_tests
+TEST_BIN = test/run_tests            # CAMBIO: de 'tests/run_tests' a 'test/run_tests'
 
 # --------------------------------------------------------
 #  Objetivo por defecto: compilar el juego
@@ -34,16 +34,13 @@ $(BIN): $(OBJ)
 #  Compilar los tests
 # --------------------------------------------------------
 tests: $(TEST_OBJ) $(OBJ)
-	//.
-	@mkdir -p test
-	//.
 	$(CC) $(TEST_OBJ) $(OBJ) -o $(TEST_BIN)
 
 # --------------------------------------------------------
 #  Limpieza de archivos compilados
 # --------------------------------------------------------
 clean:
-	rm -f src/*.o test/*.o $(BIN) $(TEST_BIN)
+	rm -f src/*.o test/*.o $(BIN) $(TEST_BIN)  # CAMBIO: de 'tests/*.o' a 'test/*.o'
 
 # --------------------------------------------------------
 #  Limpieza total (incluye el ejecutable de juego)
